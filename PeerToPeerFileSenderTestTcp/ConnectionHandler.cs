@@ -15,10 +15,16 @@ namespace PeerToPeerFileSenderTestTcp
     {
         private NetworkStream clientStream;
         public string messege { get; set; } = "kør";
+        private TcpClient Client;
 
         public ConnectionHandler(NetworkStream ClientStream)
         {
             clientStream = ClientStream;
+        }
+        public ConnectionHandler(NetworkStream ClientStream, TcpClient client)
+        {
+            clientStream = ClientStream;
+            Client = client;
         }
 
 
@@ -74,7 +80,7 @@ namespace PeerToPeerFileSenderTestTcp
 
                         messege = Console.ReadLine();
 
-                        if (messege.ToLower().StartsWith("request"))
+                        if (messege.ToLower().StartsWith("request") && Client == null);
                         {
                             string[] messeges = messege.Split();
                             if (messeges[2] != null)
