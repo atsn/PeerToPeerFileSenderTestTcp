@@ -68,6 +68,7 @@ namespace PeerToPeerFileSenderTestTcp
                 {
                     try
                     {
+                        Console.WriteLine("Please enter messege");
                         StreamWriter clientStreamWriter = new StreamWriter(clientStream);
                         clientStreamWriter.AutoFlush = true;
 
@@ -76,10 +77,7 @@ namespace PeerToPeerFileSenderTestTcp
                         if (messege.ToLower().StartsWith("request") && Client == null) ;
                         {
                             string[] messeges = messege.Split();
-                            if (messeges[2] != null)
-                            {
-                                Console.WriteLine("Wrong Rrequest Format");
-                            }
+
                             clientStreamWriter.WriteLine(messege);
                             reshivefile();
                         }
