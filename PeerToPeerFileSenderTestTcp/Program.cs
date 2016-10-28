@@ -7,6 +7,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using PeerToPeerFileSenderTestTcp.Powernap;
+using ContentFile = SoapService.ContentFile;
 
 namespace PeerToPeerFileSenderTestTcp
 {
@@ -14,20 +16,41 @@ namespace PeerToPeerFileSenderTestTcp
     {
         static void Main(string[] args)
         {
+
             try
             {
+                Powernap.PowerNapServiceClient powernap = new PowerNapServiceClient();
+
+                //powernap.Add("Anders.txt", "192.168.3.102", 6789);
+                //powernap.Add("Jane.txt", "192.168.3.102", 6789);
+                //powernap.Add("Jasper.txt", "192.168.3.102", 6789);
+                //powernap.Add("Thomas.txt", "192.168.3.102", 6789);
+                
+
+              
                 Console.WriteLine("press 1 to request file");
                 ConsoleKeyInfo pressedkey = Console.ReadKey(true);
                 string testtesttest = "messege";
                 if (pressedkey.Key == ConsoleKey.NumPad1 || pressedkey.Key == ConsoleKey.D1)
                 {
-                    TcpClient client = new TcpClient("192.168.3.102", 6789);
+                    Console.WriteLine("Type In Filename");
 
-                    var clientStream = client.GetStream();
+                    string filename = Console.ReadLine();
+                    if (powernap.RequestFile(filename).FileName == null)
+                    {
+                        Console.WriteLine("file not file");
+                    }
+                    else
+                    {
+                        TcpClient client = new TcpClient(powernap.RequestFile(filename).IpAddress, powernap.RequestFile(filename).Port);
 
-                    ConnectionHandler handler = new ConnectionHandler(clientStream);
-                    Thread Sendthread = new Thread(handler.Sendmessege);
-                    Sendthread.Start();
+                        var clientStream = client.GetStream();
+
+                        ConnectionHandler handler = new ConnectionHandler(clientStream, powernap.RequestFile(filename).FileName);
+                        Thread Sendthread = new Thread(handler.Sendmessege);
+                        Sendthread.Start();
+                    }
+
                 }
 
                 TcpListener listener = new TcpListener(IPAddress.Any, 6789);

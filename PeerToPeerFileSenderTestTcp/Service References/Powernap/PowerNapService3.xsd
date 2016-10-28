@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SoapService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SoapService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ContentFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IpAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Port" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ContentFile" nillable="true" type="tns:ContentFile" />
+  <xs:complexType name="ArrayOfContentFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContentFile" nillable="true" type="tns:ContentFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContentFile" nillable="true" type="tns:ArrayOfContentFile" />
+</xs:schema>

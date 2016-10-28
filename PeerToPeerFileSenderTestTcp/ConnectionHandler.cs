@@ -8,17 +8,25 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using PeerToPeerFileSenderTestTcp.Powernap;
 
 namespace PeerToPeerFileSenderTestTcp
 {
     class ConnectionHandler
     {
+
         private NetworkStream clientStream;
         public string messege { get; set; } = "kør";
         private TcpClient Client;
-
+        Powernap.PowerNapServiceClient powernap = new PowerNapServiceClient();
         public ConnectionHandler(NetworkStream ClientStream)
         {
+            clientStream = ClientStream;
+        }
+
+        public ConnectionHandler(NetworkStream ClientStream, string messege)
+        {
+            this.messege = messege;
             clientStream = ClientStream;
         }
         public ConnectionHandler(NetworkStream ClientStream, TcpClient client)
@@ -26,6 +34,7 @@ namespace PeerToPeerFileSenderTestTcp
             clientStream = ClientStream;
             Client = client;
         }
+
 
         public void Reshive()
         {
@@ -40,10 +49,7 @@ namespace PeerToPeerFileSenderTestTcp
                     if (messege.ToLower().StartsWith("request"))
                     {
                         string[] messeges = messege.Split();
-                        if (messeges[2] != null)
-                        {
-                            Sendmessege("Wrong Request Format");
-                        }
+
                         foreach (var s in messeges)
                         {
                             if (!s.Contains("request"))
@@ -52,7 +58,7 @@ namespace PeerToPeerFileSenderTestTcp
                             }
                         }
                     }
-                    Console.WriteLine(clientStreamReader.ReadLine());
+                    Console.WriteLine(messege);
                 }
                 catch (Exception e)
                 {
@@ -68,13 +74,12 @@ namespace PeerToPeerFileSenderTestTcp
                 {
                     try
                     {
-                        Console.WriteLine("Please enter messege");
                         StreamWriter clientStreamWriter = new StreamWriter(clientStream);
                         clientStreamWriter.AutoFlush = true;
 
                         messege = Console.ReadLine();
 
-                        if (messege.ToLower().StartsWith("request") && Client == null) ;
+                        if (messege.ToLower().StartsWith("request") && Client == null)
                         {
                             string[] messeges = messege.Split();
 
@@ -113,15 +118,15 @@ namespace PeerToPeerFileSenderTestTcp
             try
             {
                 FileStream file =
-                    new FileStream(
-                        @"C:\Users\Ander\Documents\MEGA\Visual Studio Apps\Små Projector\PeerToPeerFileSenderTestTcp\Files\" +
-                        filename, FileMode.Open);
+                      new FileStream(
+                          @"C:\Users\Ander\Documents\MEGA\Visual Studio Apps\Små Projector\PeerToPeerFileSenderTestTcp\Files\" +
+                          filename, FileMode.Open);
 
                 StreamWriter clientStreamWriter = new StreamWriter(clientStream);
                 clientStreamWriter.AutoFlush = true;
-
-                messege = Console.ReadLine();
+                Console.WriteLine("sending file now");
                 clientStreamWriter.Write(file);
+                Console.WriteLine("File is sendt");
             }
             catch (Exception e)
             {
@@ -134,17 +139,19 @@ namespace PeerToPeerFileSenderTestTcp
         {
             try
             {
-                StreamReader clientStreamReader = new StreamReader(clientStream);
 
-                messege = clientStreamReader.ReadToEnd();
-                byte[] bytes = new byte[messege.Length];
+                using (Stream stream = new FileStream(@"C:\Users\Ander\Documents\MEGA\Visual Studio Apps\Små Projector\PeerToPeerFileSenderTestTcp\Files\", FileMode.Create, FileAccess.ReadWrite))
+                {
+                    // Buffer for reading data
+                    Byte[] bytes = new Byte[1024];
 
-                FileStream file =
-                    new FileStream(
-                        @"C:\Users\Ander\Documents\MEGA\Visual Studio Apps\Små Projector\PeerToPeerFileSenderTestTcp\Files\",
-                        FileMode.Create);
+                    int length;
 
-                file.Write(bytes, 0, messege.Length);
+                    while ((length = clientStream.Read(bytes, 0, bytes.Length)) != 0)
+                    {
+                        stream.Write(bytes, 0, length);
+                    }
+                }
 
                 Console.WriteLine("file reshived");
 

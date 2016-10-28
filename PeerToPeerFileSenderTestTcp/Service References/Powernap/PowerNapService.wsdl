@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PowerNapService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpsBinding_IPowerNapService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://jwapowernapservice.azurewebsites.net/PowerNapService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://jwapowernapservice.azurewebsites.net/PowerNapService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://jwapowernapservice.azurewebsites.net/PowerNapService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://jwapowernapservice.azurewebsites.net/PowerNapService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/SoapService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPowerNapService_Count_InputMessage">
+    <wsdl:part name="parameters" element="tns:Count" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_Count_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_CountHost_InputMessage">
+    <wsdl:part name="parameters" element="tns:CountHost" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_CountHost_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CountHostResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_CountFilename_InputMessage">
+    <wsdl:part name="parameters" element="tns:CountFilename" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_CountFilename_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CountFilenameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_Add_InputMessage">
+    <wsdl:part name="parameters" element="tns:Add" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_Add_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_AddAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAll" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_AddAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_Remove_InputMessage">
+    <wsdl:part name="parameters" element="tns:Remove" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_Remove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_RemoveAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAll" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_RemoveAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_RequestFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestFile" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_RequestFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RequestFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_SearchArchive_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchArchive" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_SearchArchive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchArchiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_SendArchive_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendArchive" />
+  </wsdl:message>
+  <wsdl:message name="IPowerNapService_SendArchive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendArchiveResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPowerNapService">
+    <wsdl:operation name="Count">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/Count" message="tns:IPowerNapService_Count_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/CountResponse" message="tns:IPowerNapService_Count_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CountHost">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/CountHost" message="tns:IPowerNapService_CountHost_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/CountHostResponse" message="tns:IPowerNapService_CountHost_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CountFilename">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/CountFilename" message="tns:IPowerNapService_CountFilename_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/CountFilenameResponse" message="tns:IPowerNapService_CountFilename_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/Add" message="tns:IPowerNapService_Add_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/AddResponse" message="tns:IPowerNapService_Add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/AddAll" message="tns:IPowerNapService_AddAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/AddAllResponse" message="tns:IPowerNapService_AddAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/Remove" message="tns:IPowerNapService_Remove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/RemoveResponse" message="tns:IPowerNapService_Remove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/RemoveAll" message="tns:IPowerNapService_RemoveAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/RemoveAllResponse" message="tns:IPowerNapService_RemoveAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/RequestFile" message="tns:IPowerNapService_RequestFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/RequestFileResponse" message="tns:IPowerNapService_RequestFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchArchive">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/SearchArchive" message="tns:IPowerNapService_SearchArchive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/SearchArchiveResponse" message="tns:IPowerNapService_SearchArchive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendArchive">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPowerNapService/SendArchive" message="tns:IPowerNapService_SendArchive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPowerNapService/SendArchiveResponse" message="tns:IPowerNapService_SendArchive_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IPowerNapService" type="tns:IPowerNapService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Count">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/Count" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountHost">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/CountHost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountFilename">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/CountFilename" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/Add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAll">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/AddAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/Remove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAll">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/RemoveAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestFile">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/RequestFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchArchive">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/SearchArchive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendArchive">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/SendArchive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpsBinding_IPowerNapService" type="tns:IPowerNapService">
+    <wsp:PolicyReference URI="#BasicHttpsBinding_IPowerNapService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Count">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/Count" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountHost">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/CountHost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountFilename">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/CountFilename" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/Add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAll">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/AddAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/Remove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAll">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/RemoveAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestFile">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/RequestFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchArchive">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/SearchArchive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendArchive">
+      <soap:operation soapAction="http://tempuri.org/IPowerNapService/SendArchive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PowerNapService">
+    <wsdl:port name="BasicHttpBinding_IPowerNapService" binding="tns:BasicHttpBinding_IPowerNapService">
+      <soap:address location="http://jwapowernapservice.azurewebsites.net/PowerNapService.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpsBinding_IPowerNapService" binding="tns:BasicHttpsBinding_IPowerNapService">
+      <soap:address location="https://jwapowernapservice.azurewebsites.net/PowerNapService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
