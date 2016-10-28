@@ -27,8 +27,6 @@ namespace PeerToPeerFileSenderTestTcp
             Client = client;
         }
 
-
-
         public void Reshive()
         {
             while (!messege.ToLower().Equals("stop"))
@@ -59,13 +57,8 @@ namespace PeerToPeerFileSenderTestTcp
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-
                 }
-
             }
-
-
-
         }
 
         public void Sendmessege()
@@ -80,12 +73,12 @@ namespace PeerToPeerFileSenderTestTcp
 
                         messege = Console.ReadLine();
 
-                        if (messege.ToLower().StartsWith("request") && Client == null);
+                        if (messege.ToLower().StartsWith("request") && Client == null) ;
                         {
                             string[] messeges = messege.Split();
                             if (messeges[2] != null)
                             {
-                                Sendmessege("Wrong Request Format");
+                                Console.WriteLine("Wrong Rrequest Format");
                             }
                             clientStreamWriter.WriteLine(messege);
                             reshivefile();
@@ -95,18 +88,13 @@ namespace PeerToPeerFileSenderTestTcp
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
-
                     }
                 }
-
             }
-
-
         }
 
         public void Sendmessege(string Messege)
         {
-
             {
                 try
                 {
@@ -118,19 +106,12 @@ namespace PeerToPeerFileSenderTestTcp
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-
                 }
             }
-
-
-
-
         }
 
         public void Sendfile(string filename)
         {
-
-
             try
             {
                 FileStream file =
@@ -143,13 +124,11 @@ namespace PeerToPeerFileSenderTestTcp
 
                 messege = Console.ReadLine();
                 clientStreamWriter.Write(file);
-
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 Sendmessege(e.Message);
-
             }
         }
 
@@ -177,7 +156,6 @@ namespace PeerToPeerFileSenderTestTcp
             {
                 Console.WriteLine(e + e.Message);
             }
-
         }
     }
 }
