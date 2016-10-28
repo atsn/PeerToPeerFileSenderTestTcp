@@ -16,12 +16,12 @@ namespace PeerToPeerFileSenderTestTcp
         {
             try
             {
+                Console.WriteLine("press 1 to request file");
                 ConsoleKeyInfo pressedkey = Console.ReadKey();
                 string testtesttest = "messege";
-                Console.WriteLine("press 1 to request file");
                 if (pressedkey.Key == ConsoleKey.NumPad1 || pressedkey.Key == ConsoleKey.D1)
                 {
-                    TcpClient client = new TcpClient("192.168.0.18", 6789);
+                    TcpClient client = new TcpClient("192.168.3.102", 6789);
                     
                     var clientStream = client.GetStream();
 
@@ -31,17 +31,20 @@ namespace PeerToPeerFileSenderTestTcp
                 }
 
 
+                while (true)
+                {
+                    TcpListener listener = new TcpListener(IPAddress.Any, 6789);
+                    listener.Start();
 
-                TcpListener listener = new TcpListener(IPAddress.Any, 6789);
-                listener.Start();
+                    var serverstream = listener.AcceptTcpClient();
 
-                var serverstream = listener.AcceptTcpClient();
-
-                ConnectionHandler handler2 = new ConnectionHandler(serverstream.GetStream(), serverstream);
-                Thread Reshivethreadserver = new Thread(handler2.Reshive);
-                Thread Sendthreadserver = new Thread(handler2.Sendmessege);
-                Reshivethreadserver.Start();
-                Sendthreadserver.Start();
+                    ConnectionHandler handler2 = new ConnectionHandler(serverstream.GetStream(), serverstream);
+                    Thread Reshivethreadserver = new Thread(handler2.Reshive);
+                    Thread Sendthreadserver = new Thread(handler2.Sendmessege);
+                    Reshivethreadserver.Start();
+                    Sendthreadserver.Start();
+                }
+                
 
 
 

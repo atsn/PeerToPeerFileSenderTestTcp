@@ -175,7 +175,7 @@ namespace PeerToPeerFileSenderTestTcp
 
             catch (Exception e)
             {
-
+                Console.WriteLine(e + e.Message);
             }
 
         }
